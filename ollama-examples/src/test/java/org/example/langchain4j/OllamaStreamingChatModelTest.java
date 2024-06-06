@@ -8,7 +8,9 @@ import dev.langchain4j.model.chat.StreamingChatLanguageModel;
 import dev.langchain4j.model.ollama.OllamaStreamingChatModel;
 import dev.langchain4j.model.output.Response;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith(ElapsedTimeExtension.class)
 class OllamaStreamingChatModelTest {
 
     @Test
@@ -22,7 +24,6 @@ class OllamaStreamingChatModelTest {
 
         String userMessage = "Write a 100-word poem about Java and AI";
 
-        long start = System.currentTimeMillis();
         CompletableFuture<Response<AiMessage>> futureResponse = new CompletableFuture<>();
         model.generate(userMessage, new StreamingResponseHandler<AiMessage>() {
 
@@ -43,6 +44,5 @@ class OllamaStreamingChatModelTest {
         });
 
         futureResponse.join();
-        System.out.println("Time: " + (System.currentTimeMillis() - start) + " ms");
     }
 }
