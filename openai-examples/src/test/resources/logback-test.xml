@@ -7,7 +7,7 @@
     </encoder>
   </appender>
 
-  <logger name="org.example.langchain4j" level="info"/>
+  <logger name="dev.langchain4j" level="debug"/>
 
   <root level="info">
     <appender-ref ref="consoleAppender" />
