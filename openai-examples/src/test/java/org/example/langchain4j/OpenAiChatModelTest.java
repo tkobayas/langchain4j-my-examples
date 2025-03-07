@@ -5,18 +5,19 @@ import dev.langchain4j.model.openai.OpenAiChatModel;
 
 import org.junit.jupiter.api.Test;
 
+import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
+
 class OpenAiChatModelTest {
 
     @Test
     void simple_example() {
 
-        ChatLanguageModel model = OpenAiChatModel.builder()
-                .apiKey("demo")
-                .logRequests(true)
-                .logResponses(true)
+        ChatLanguageModel chatModel = OpenAiChatModel.builder()
+                .apiKey(ApiKeys.OPENAI_API_KEY)
+                .modelName(GPT_4_O_MINI)
                 .build();
 
-        String joke = model.generate("Tell me a joke about Java");
+        String joke = chatModel.chat("Tell me a joke about Java");
 
         System.out.println(joke);
     }
@@ -24,9 +25,12 @@ class OpenAiChatModelTest {
     @Test
     void generateDrl() {
 
-        ChatLanguageModel model = OpenAiChatModel.withApiKey("demo");
+        ChatLanguageModel model = OpenAiChatModel.builder()
+                .apiKey(ApiKeys.OPENAI_API_KEY)
+                .modelName(GPT_4_O_MINI)
+                .build();
 
-        String drl = model.generate("Write DRL rules for Drools. " +
+        String drl = model.chat("Write DRL rules for Drools. " +
                                             "If a person is a child, then they are not eligible to vote. If a person is not a child, then they are eligible to vote." +
                                             "`eligible to vote` is a flag in Person class. Modify it in RHS of the rule" +
                                             "Don't include any other description. Write DRL rules only.");

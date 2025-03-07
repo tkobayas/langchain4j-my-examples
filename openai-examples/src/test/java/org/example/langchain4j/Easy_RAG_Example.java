@@ -1,11 +1,8 @@
 package org.example.langchain4j;
-
-import java.util.List;
-
-
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
@@ -14,13 +11,18 @@ import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 import shared.Assistant;
 
+import java.util.List;
+
 import static dev.langchain4j.data.document.loader.FileSystemDocumentLoader.loadDocuments;
-import static shared.Utils.OPENAI_API_KEY;
-import static shared.Utils.glob;
-import static shared.Utils.startConversationWith;
-import static shared.Utils.toPath;
+import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
+import static shared.Utils.*;
 
 public class Easy_RAG_Example {
+
+    private static final ChatLanguageModel CHAT_MODEL = OpenAiChatModel.builder()
+            .apiKey(OPENAI_API_KEY)
+            .modelName(GPT_4_O_MINI)
+            .build();
 
     /**
      * This example demonstrates how to implement an "Easy RAG" (Retrieval-Augmented Generation) application.
@@ -37,7 +39,7 @@ public class Easy_RAG_Example {
 
         // Second, let's create an assistant that will have access to our documents
         Assistant assistant = AiServices.builder(Assistant.class)
-                .chatLanguageModel(OpenAiChatModel.withApiKey(OPENAI_API_KEY)) // it should use OpenAI LLM
+                .chatLanguageModel(CHAT_MODEL) // it should use OpenAI LLM
                 .chatMemory(MessageWindowChatMemory.withMaxMessages(10)) // it should remember 10 latest messages
                 .contentRetriever(createContentRetriever(documents)) // it should have access to our documents
                 .build();
