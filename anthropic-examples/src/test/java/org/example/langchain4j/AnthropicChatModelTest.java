@@ -21,7 +21,7 @@ class AnthropicChatModelTest {
 
         ChatLanguageModel chatModel = AnthropicChatModel.builder()
                 .apiKey(ApiKeys.ANTHROPIC_API_KEY)
-                .modelName(AnthropicChatModelName.CLAUDE_3_7_SONNET_20250219)
+                .modelName(AnthropicChatModelName.CLAUDE_3_5_HAIKU_20241022)
                 .temperature(0.3)
                 .logRequests(true)
                 .logResponses(true)
@@ -37,7 +37,7 @@ class AnthropicChatModelTest {
 
         ChatLanguageModel chatModel = AnthropicChatModel.builder()
                 .apiKey(ApiKeys.ANTHROPIC_API_KEY)
-                .modelName(AnthropicChatModelName.CLAUDE_3_7_SONNET_20250219)
+                .modelName(AnthropicChatModelName.CLAUDE_3_5_HAIKU_20241022)
                 .temperature(0.3)
                 .logRequests(true)
                 .logResponses(true)
@@ -59,7 +59,7 @@ class AnthropicChatModelTest {
 
         ChatLanguageModel chatModel = AnthropicChatModel.builder()
                 .apiKey(ApiKeys.ANTHROPIC_API_KEY)
-                .modelName(AnthropicChatModelName.CLAUDE_3_7_SONNET_20250219)
+                .modelName(AnthropicChatModelName.CLAUDE_3_5_HAIKU_20241022)
                 .temperature(0.3)
                 .build();
 
@@ -97,7 +97,7 @@ class AnthropicChatModelTest {
     void aiService() {
         ChatLanguageModel chatModel = AnthropicChatModel.builder()
                 .apiKey(ApiKeys.ANTHROPIC_API_KEY)
-                .modelName(AnthropicChatModelName.CLAUDE_3_7_SONNET_20250219)
+                .modelName(AnthropicChatModelName.CLAUDE_3_5_HAIKU_20241022)
                 .temperature(0.3)
                 .build();
 
@@ -116,7 +116,7 @@ class AnthropicChatModelTest {
 
         ChatLanguageModel model = AnthropicChatModel.builder()
                 .apiKey(ApiKeys.ANTHROPIC_API_KEY)
-                .modelName(AnthropicChatModelName.CLAUDE_3_7_SONNET_20250219)
+                .modelName(AnthropicChatModelName.CLAUDE_3_5_HAIKU_20241022)
                 .build();
 
         String drl = model.chat("Write DRL rules for Drools. " +
