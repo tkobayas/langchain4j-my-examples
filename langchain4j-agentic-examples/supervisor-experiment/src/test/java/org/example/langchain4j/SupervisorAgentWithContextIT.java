@@ -9,11 +9,10 @@ import org.junit.jupiter.api.Test;
 import static org.example.langchain4j.Models.baseModel;
 import static org.example.langchain4j.Models.plannerModel;
 
-public class SupervisorAgentIT {
+public class SupervisorAgentWithContextIT {
 
-    // Writer Agent Tests for the SupervisorAgent
-    // This test demonstrates how to let the SupervisorAgent manage a loop of agents,
-    // which was done in langchain4j-agentic test case WorkflowAgentsIT/SupervisorAndWorkflowAgentsIT using loopBuilder
+    // use SupervisorAgentService.supervisorContext
+    // not seeing much difference from SupervisorAgentIT for now
     @Test
     void loop_test() {
         Agents.CreativeWriter creativeWriter = AgenticServices.agentBuilder(Agents.CreativeWriter.class)
@@ -34,6 +33,11 @@ public class SupervisorAgentIT {
         SupervisorAgent supervisorAgent = AgenticServices.supervisorBuilder()
                 .chatModel(plannerModel())
                 .responseStrategy(SupervisorResponseStrategy.SUMMARY)
+                .supervisorContext("At first, create a task list based on the user request." +
+                        " Then, keep track of completed tasks and remaining tasks." +
+                        " Prioritize the tasks based on their importance and urgency." +
+                        " Continuously update the task list as new information becomes available." +
+                        " Ensure that all tasks are completed in a timely manner.")
                 .subAgents(creativeWriter, styleEditor, styleScorer)
                 .outputKey("summary")
                 .build();

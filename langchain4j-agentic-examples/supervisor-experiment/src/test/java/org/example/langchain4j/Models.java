@@ -6,6 +6,12 @@ import dev.langchain4j.model.openai.OpenAiChatModelName;
 
 public class Models {
 
+    static {
+        System.out.println("OPENAI_API_KEY: " + System.getenv("OPENAI_API_KEY"));
+        System.out.println("OPENAI_ORGANIZATION_ID: " + System.getenv("OPENAI_ORGANIZATION_ID"));
+        System.out.println("OPENAI_BASE_URL: " + System.getenv("OPENAI_BASE_URL"));
+    }
+
     private static final ChatModel OPENAI_BASE_MODEL = OpenAiChatModel.builder()
             .baseUrl(System.getenv("OPENAI_BASE_URL"))
             .apiKey(System.getenv("OPENAI_API_KEY"))
